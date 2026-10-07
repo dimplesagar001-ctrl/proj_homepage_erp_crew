@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Library — KDS ERP Crew</title>
+  <meta name="description" content="Explore the complete KDS ERP Crew AI Agent Library featuring intelligent AI agents for Microsoft Dynamics 365." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('assets/fonts/inter.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Catalogue sticky filter sits just below the sticky header */
+    #catalogue-filter-sticky {
+      position: sticky;
+      top: 86px; /* updated by JS after measuring header */
+      z-index: 10;
+    }
+    /* ── Footer ──────────────────────────────────────────────────── */
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    @media (min-width: 768px) {
+      .footer-inner { flex-direction: row; align-items: flex-start; }
+    }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .footer-right { align-items: flex-end; text-align: right; align-self: flex-start; }
+    }
+    .footer-divider {
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    .footer-social-btn {
+      display: flex;
+      height: 2.25rem;
+      width: 2.25rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      background-color: rgba(255,255,255,0.10);
+      color: #fff;
+      transition: background-color 0.15s;
+    }
+    .footer-social-btn:hover { background-color: rgba(255,255,255,0.25); }
+    .footer-kds-link { transition: opacity 0.15s; }
+    .footer-kds-link:hover { opacity: 0.80; }
+    .footer-copyright {
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 1.5rem;
+    }
+    /* ── Agent Library hero ─────────────────────────────────────── */
+    #agent-library-hero {
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 1024 / 410;
+    }
+    .agent-library-hero-image {
+      object-position: center top;
+      transform: none;
+    }
+    .agent-library-hero-overlay {
+      background: linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.90) 34%, rgba(255,255,255,0.28) 68%, rgba(255,255,255,0) 100%);
+    }
+    .agent-library-hero-copy {
+      max-width: 42rem;
+    }
+    .agent-library-hero-features {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      max-width: 46rem;
+      margin-top: 2rem;
+    }
+    .agent-library-hero-feature {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0 1rem;
+      border-left: 1px solid rgba(5, 24, 149, 0.18);
+    }
+    .agent-library-hero-feature:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .agent-library-hero-feature-icon {
+      flex: 0 0 auto;
+      color: #051895;
+    }
+    .agent-library-hero-feature-label {
+      color: #1d2025;
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    /* ── Catalogue introduction ─────────────────────────────────── */
+    .catalogue-intro {
+      max-width: 56rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .catalogue-intro-title {
+      color: #051895;
+      font-size: clamp(2.25rem, 4vw, 3.35rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+    .catalogue-intro-copy {
+      max-width: 50rem;
+      margin: 1.25rem auto 0;
+      color: #6b7280;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .catalogue-intro-search {
+      max-width: 50rem;
+      margin: 2.75rem auto 0;
+      padding: 1px;
+      border-radius: 0.7rem;
+      background: linear-gradient(90deg, #2ababe 0%, #051895 50%, #2ababe 100%);
+      box-shadow: 0 1px 4px rgba(5, 24, 149, 0.12);
+    }
+    .catalogue-intro-search-inner {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.65rem;
+      background: #fff;
+    }
+    .catalogue-intro-search-icon {
+      pointer-events: none;
+      position: absolute;
+      right: 1.1rem;
+      top: 50%;
+      color: #2ababe;
+      transform: translateY(-50%);
+    }
+    .catalogue-intro-search input {
+      width: 100%;
+      height: 3.1rem;
+      border: 0;
+      padding: 0 3.25rem 0 1.1rem;
+      color: #334155;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .catalogue-intro-search input::placeholder {
+      color: #a8a0ad;
+    }
+    .catalogue-intro-search input:focus {
+      box-shadow: inset 0 0 0 2px rgba(42, 186, 190, 0.28);
+    }
+    /* ── Catalogue browsing layout ──────────────────────────────── */
+    .catalogue-layout {
+      display: grid;
+      grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .catalogue-category-sidebar {
+      min-width: 0;
+    }
+    .catalogue-category-title {
+      margin-bottom: 1rem;
+      color: #051895;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    #filter-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .catalogue-filter-btn {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border: 0;
+      border-bottom: 1px solid rgba(5, 24, 149, 0.08);
+      padding: 0.65rem 0.15rem;
+      background: transparent;
+      color: #475569;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-align: left;
+      transition: color 0.15s, padding 0.15s;
+    }
+    .catalogue-filter-btn:hover,
+    .catalogue-filter-btn.catalogue-filter-active {
+      color: #051895;
+    }
+    .catalogue-filter-btn.catalogue-filter-active {
+      padding-left: 0.35rem;
+      font-weight: 700;
+    }
+    .catalogue-filter-arrow {
+      color: #2ababe;
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: transform 0.15s;
+    }
+    .catalogue-filter-btn:hover .catalogue-filter-arrow,
+    .catalogue-filter-btn.catalogue-filter-active .catalogue-filter-arrow {
+      transform: translateX(0.15rem);
+    }
+    .catalogue-filter-btn .filter-count {
+      display: none;
+    }
+    .catalogue-results {
+      min-width: 0;
+    }
+    .catalogue-results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .catalogue-results-header #catalogue-count {
+      margin: 0;
+      color: #6b7280;
+      font-size: 0.78rem;
+    }
+    .catalogue-results-header #catalogue-count .font-semibold {
+      color: #051895;
+    }
+    .catalogue-agent-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .catalogue-agent-card {
+      display: flex;
+      min-width: 0;
+      min-height: 16.5rem;
+      flex-direction: column;
+      border: 1px solid #dce3f7;
+      border-radius: 1.1rem;
+      padding: 1.35rem;
+      background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+      box-shadow: 0 2px 8px rgba(5, 24, 149, 0.04);
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .catalogue-agent-card:hover {
+      border-color: #2ababe;
+      box-shadow: 0 8px 18px rgba(5, 24, 149, 0.1);
+      transform: translateY(-2px);
+    }
+    .catalogue-agent-icon-stack {
+      display: flex;
+      align-items: center;
+      min-height: 2.35rem;
+      margin-bottom: 1.15rem;
+    }
+    .catalogue-agent-icon {
+      display: inline-flex;
+      width: 2.25rem;
+      height: 2.25rem;
+      align-items: center;
+      justify-content: center;
+      margin-left: -0.35rem;
+      border: 2px solid #fff;
+      border-radius: 9999px;
+      color: #fff;
+    }
+    .catalogue-agent-icon:first-child {
+      margin-left: 0;
+    }
+    .catalogue-agent-icon svg {
+      width: 1.05rem;
+      height: 1.05rem;
+    }
+    .catalogue-agent-icon-navy { background: #051895; }
+    .catalogue-agent-icon-teal { background: #2ababe; }
+    .catalogue-agent-icon-orange { background: #fba226; }
+    .catalogue-agent-card-title {
+      margin: 0;
+      color: #051895;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .catalogue-agent-card-description {
+      margin-top: 0.8rem;
+      color: #6b7280;
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+    .catalogue-agent-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: auto;
+      padding-top: 1.25rem;
+      color: #051895;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .catalogue-agent-action svg {
+      transition: transform 0.15s;
+    }
+    .catalogue-agent-action:hover svg {
+      transform: translateX(0.15rem);
+    }
+    /* ── Build your first AI agent CTA ──────────────────────────── */
+    .agent-library-build-cta {
+      border-top: 1px solid rgba(5, 24, 149, 0.08);
+      border-bottom: 1px solid rgba(5, 24, 149, 0.08);
+      background:
+        radial-gradient(circle at 8% 18%, rgba(42, 186, 190, 0.12), transparent 30%),
+        linear-gradient(135deg, #f3f7ff 0%, #ffffff 58%, #eefbfc 100%);
+    }
+    .agent-library-build-cta-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      max-width: 90rem;
+      margin: 0 auto;
+      padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1.5rem, 4vw, 2.5rem);
+    }
+    .agent-library-build-cta-copy {
+      max-width: 36rem;
+    }
+    .agent-library-build-cta-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      background: #051895;
+      color: #ffffff;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .agent-library-build-cta-eyebrow svg {
+      color: #fba226;
+    }
+    .agent-library-build-cta-title {
+      margin-top: 1.25rem;
+      color: #051895;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+    .agent-library-build-cta-lead {
+      margin-top: 1.25rem;
+      color: #1d2025;
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .agent-library-build-cta-description {
+      margin-top: 0.75rem;
+      max-width: 32rem;
+      color: #5b6472;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .agent-library-build-cta-image-wrap {
+      position: relative;
+      overflow: hidden;
+      border: 8px solid rgba(255, 255, 255, 0.8);
+      border-radius: 1.5rem;
+      background: #ffffff;
+      box-shadow: 0 1.5rem 3.5rem rgba(5, 24, 149, 0.16);
+    }
+    .agent-library-build-cta-image-wrap::after {
+      position: absolute;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      width: 4rem;
+      height: 4rem;
+      border-right: 3px solid #fba226;
+      border-bottom: 3px solid #fba226;
+      border-radius: 0 0.75rem 0 0;
+      content: "";
+      pointer-events: none;
+    }
+    .agent-library-build-cta-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* ── AI opportunity guide CTA ───────────────────────────────── */
+    .agent-library-ai-start {
+      padding: clamp(3rem, 6vw, 5.5rem) clamp(1rem, 3vw, 2.5rem);
+      background: #ffffff;
+    }
+    .agent-library-ai-start-panel {
+      position: relative;
+      overflow: hidden;
+      max-width: 90rem;
+      margin: 0 auto;
+      border-radius: 1.5rem;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(42, 186, 190, 0.24), transparent 24%),
+        linear-gradient(120deg, #051895 0%, #07135d 58%, #032c62 100%);
+      box-shadow: 0 1.5rem 3.5rem rgba(5, 24, 149, 0.18);
+    }
+    .agent-library-ai-start-panel::before,
+    .agent-library-ai-start-panel::after {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 9999px;
+      content: "";
+      pointer-events: none;
+    }
+    .agent-library-ai-start-panel::before {
+      top: -8rem;
+      right: 18%;
+      width: 22rem;
+      height: 22rem;
+    }
+    .agent-library-ai-start-panel::after {
+      right: -6rem;
+      bottom: -9rem;
+      width: 25rem;
+      height: 25rem;
+      border-color: rgba(251, 162, 38, 0.24);
+    }
+    .agent-library-ai-start-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: center;
+      padding: clamp(2rem, 6vw, 5rem);
+    }
+    .agent-library-ai-start-copy {
+      max-width: 40rem;
+    }
+    .agent-library-ai-start-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #8be8e8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .agent-library-ai-start-eyebrow span {
+      display: block;
+      width: 2.25rem;
+      height: 2px;
+      background: #fba226;
+    }
+    .agent-library-ai-start-title {
+      margin-top: 1.15rem;
+      color: #ffffff;
+      font-size: clamp(2rem, 4vw, 3.45rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+    .agent-library-ai-start-description {
+      margin-top: 1.25rem;
+      max-width: 35rem;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.7;
+    }
+    .agent-library-ai-start-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      border-radius: 0.5rem;
+      background: #2ababe;
+      color: #ffffff;
+      padding: 0.8rem 1.35rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.15s, transform 0.15s;
+    }
+    .agent-library-ai-start-button:hover {
+      background: #229fa3;
+      transform: translateY(-1px);
+    }
+    .agent-library-ai-start-guide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .agent-library-ai-start-card {
+      min-height: 100%;
+      padding: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+    .agent-library-ai-start-card:nth-child(2) {
+      border-color: rgba(42, 186, 190, 0.45);
+      background: rgba(42, 186, 190, 0.14);
+    }
+    .agent-library-ai-start-card h3 {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .agent-library-ai-start-card ul {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .agent-library-ai-start-card li {
+      display: flex;
+      gap: 0.55rem;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+    .agent-library-ai-start-card li::before {
+      flex: 0 0 auto;
+      width: 0.4rem;
+      height: 0.4rem;
+      margin-top: 0.35rem;
+      border-radius: 9999px;
+      background: #fba226;
+      content: "";
+    }
+    .agent-library-ai-start-card:nth-child(2) li::before {
+      background: #8be8e8;
+    }
+    @media (max-width: 767px) {
+      #agent-library-hero {
+        height: auto;
+        min-height: 34rem;
+        aspect-ratio: auto;
+      }
+      .agent-library-hero-image {
+        object-position: left top;
+      }
+      .agent-library-hero-overlay {
+        background: linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.88) 60%, rgba(255,255,255,0.35) 100%);
+      }
+      .agent-library-hero-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem 0;
+        margin-top: 1.5rem;
+      }
+      .agent-library-hero-feature {
+        padding: 0 0.75rem;
+      }
+      .agent-library-hero-feature:nth-child(odd) {
+        padding-left: 0;
+        border-left: 0;
+      }
+      .agent-library-hero-feature:nth-child(even) {
+        padding-right: 0;
+      }
+      .agent-library-hero-feature:nth-child(n + 3) {
+        padding-top: 0.9rem;
+        border-top: 1px solid rgba(5, 24, 149, 0.14);
+      }
+      .catalogue-intro-title {
+        font-size: clamp(2rem, 9vw, 2.65rem);
+      }
+      .catalogue-intro-copy {
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+      .catalogue-intro-search {
+        margin-top: 2rem;
+      }
+      .catalogue-layout {
+        display: block;
+        margin-top: 2rem;
+      }
+      .catalogue-category-sidebar {
+        position: static;
+        margin-bottom: 2rem;
+      }
+      .catalogue-category-title {
+        margin-bottom: 0.5rem;
+      }
+      #filter-bar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 1rem;
+      }
+      .catalogue-filter-btn {
+        font-size: 0.75rem;
+      }
+      .catalogue-results-header {
+        margin-bottom: 0.75rem;
+      }
+      .catalogue-agent-grid {
+        grid-template-columns: 1fr;
+      }
+      .catalogue-agent-card {
+        min-height: 14rem;
+      }
+      .agent-library-build-cta-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3.5rem 1rem;
+      }
+      .agent-library-build-cta-copy {
+        max-width: none;
+      }
+      .agent-library-build-cta-title {
+        font-size: clamp(2rem, 9vw, 2.75rem);
+      }
+      .agent-library-build-cta-description {
+        font-size: 0.95rem;
+      }
+      .agent-library-build-cta-image-wrap {
+        border-width: 5px;
+        border-radius: 1rem;
+      }
+      .agent-library-build-cta-image-wrap::after {
+        right: 0.75rem;
+        bottom: 0.75rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      .agent-library-ai-start {
+        padding: 2.5rem 1rem;
+      }
+      .agent-library-ai-start-panel {
+        border-radius: 1rem;
+      }
+      .agent-library-ai-start-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.25rem;
+      }
+      .agent-library-ai-start-title {
+        font-size: clamp(2rem, 9vw, 2.75rem);
+      }
+      .agent-library-ai-start-description {
+        font-size: 0.95rem;
+      }
+      .agent-library-ai-start-guide {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="css/responsive.css?v=agent-chat-20260902" />
+</head>
+<body class="bg-background text-foreground">
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
+    <div class="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-3 md:px-10">
+      <a href="index.html">
+        <img src="assets/images/kds-logo-header.webp" alt="KDS ERP Crew" class="h-[3.75rem] object-contain" />
+      </a>
+      <div class="hidden items-center gap-8 md:flex">
+        <nav class="flex items-center gap-8">
+          <a href="index.html" class="text-[15.4px] font-medium text-gray-700 transition hover:text-[#051895]">Home</a>
+          <a href="agent-library.html" class="text-[15.4px] font-medium transition hover:text-[#051895]" style="color:#051895">Agent Library</a>
+          <a href="about.html" class="text-[15.4px] font-medium text-gray-700 transition hover:text-[#051895]">About Us</a>
+        </nav>
+        <button type="button" data-contact-modal-trigger
+           class="inline-flex items-center rounded-md px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
+           style="background-color:#051895">Schedule Your AI Audit</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════ AGENT LIBRARY HERO ═══════════════════════════ -->
+  <section id="agent-library-hero" class="relative flex flex-col overflow-clip">
+    <div class="pointer-events-none absolute inset-0">
+      <img
+         src="assets/images/agent-library-hero-banner.webp"
+        alt=""
+        width="1024"
+        height="410"
+        loading="eager"
+        decoding="async"
+        class="agent-library-hero-image h-full w-full object-cover"
+      />
+    </div>
+    <div class="agent-library-hero-overlay pointer-events-none absolute inset-0"></div>
+
+    <div class="relative z-10 mx-auto flex w-full max-w-screen-2xl flex-1 flex-col justify-center px-6 py-16 md:px-10 md:py-20">
+      <div class="agent-library-hero-copy">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-widest text-white" style="background:#051895">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><path d="m5.64 5.64 12.72 12.72"/><path d="m18.36 5.64-12.72 12.72"/></svg>
+          AI Agent Catalogue
+        </div>
+        <h1 class="text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl" style="color:#051895">
+          Your AI Workforce for Every Business Function
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed md:text-lg" style="color:#334155">
+          Discover intelligent AI agents designed to automate business processes, boost productivity, and deliver enterprise-grade AI automation across industries.
+        </p>
+        <ul class="agent-library-hero-features" aria-label="AI workforce benefits">
+          <li class="agent-library-hero-feature">
+            <svg class="agent-library-hero-feature-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M19 9h4M19 14h4M1 9h4M1 14h4"/>
+            </svg>
+            <span class="agent-library-hero-feature-label">AI-Powered<br />Automation</span>
+          </li>
+          <li class="agent-library-hero-feature">
+            <svg class="agent-library-hero-feature-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M12 8v4M5 16v-2h14v2"/>
+            </svg>
+            <span class="agent-library-hero-feature-label">Custom AI<br />Agents</span>
+          </li>
+          <li class="agent-library-hero-feature">
+            <svg class="agent-library-hero-feature-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h3a3 3 0 0 1 3 3v6"/>
+            </svg>
+            <span class="agent-library-hero-feature-label">Smarter<br />Workflows</span>
+          </li>
+          <li class="agent-library-hero-feature">
+            <svg class="agent-library-hero-feature-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 20h18"/><path d="M5 17V9h4v8M10 17V5h4v12M15 17v-6h4v6"/><path d="m5 6 4-3 3 2 6-3"/>
+            </svg>
+            <span class="agent-library-hero-feature-label">Real-Time<br />Insights</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CATALOGUE SECTION ═══════════════════════════ -->
+  <section id="catalogue" class="bg-white px-6 py-16 md:px-10 md:py-20">
+    <div class="mx-auto max-w-screen-2xl">
+
+      <!-- Section header -->
+      <div class="catalogue-intro">
+        <h2 class="catalogue-intro-title">The KDS ERP Crew Agent Library</h2>
+        <p class="catalogue-intro-copy">
+        Explore the complete KDS ERP Crew AI Agent Library, featuring intelligent AI agents for Microsoft Dynamics 365 across Finance, Sales, Procurement, Supply Chain, Manufacturing, Retail, Healthcare, BFSI, Insurance, and more. Each agent is designed to automate business processes, enhance productivity, and deliver enterprise-grade AI automation.
+        </p>
+
+        <!-- Search input -->
+        <div class="catalogue-intro-search">
+          <div class="catalogue-intro-search-inner">
+            <svg class="catalogue-intro-search-icon" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input id="search-input" type="text" placeholder="Search" aria-label="Search AI agents" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Category browser and agent results -->
+      <div class="catalogue-layout">
+        <aside id="catalogue-filter-sticky" class="catalogue-category-sidebar" aria-label="Browse agents by category">
+          <h3 class="catalogue-category-title">Browse by Category</h3>
+          <div id="filter-bar"></div>
+        </aside>
+
+        <div class="catalogue-results">
+          <div class="catalogue-results-header">
+            <p id="catalogue-count"></p>
+          </div>
+
+          <!-- Agent grid (populated by JS) -->
+          <div id="catalogue-grid" class="catalogue-agent-grid"></div>
+
+          <!-- Empty state -->
+          <div id="catalogue-empty" class="hidden mt-10 rounded-xl border border-dashed border-border bg-surface p-10 text-center text-sm text-muted-foreground">
+            No agents match your filter.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════ BUILD YOUR FIRST AI AGENT ═════════════════════ -->
+  <section id="build-your-first-agent" class="agent-library-build-cta">
+    <div class="agent-library-build-cta-inner">
+      <div class="agent-library-build-cta-copy">
+        <div class="agent-library-build-cta-eyebrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v18M3 12h18"/><path d="m5 5 14 14M19 5 5 19"/>
+          </svg>
+          KDS ERP Crew Academy
+        </div>
+        <h2 class="agent-library-build-cta-title">Build Your First AI Agent with KDS ERP Crew</h2>
+        <p class="agent-library-build-cta-lead">Start building intelligent automation for your business.</p>
+        <p class="agent-library-build-cta-description">
+          Learn how to create, customize, and deploy AI agents that can automate tasks, streamline workflows, and support smarter business decisions.
+        </p>
+      </div>
+      <div class="agent-library-build-cta-image-wrap">
+        <img
+          class="agent-library-build-cta-image"
+          src="assets/images/build-first-ai-agent-dashboard.webp"
+          alt="KDS ERP Crew AI agent dashboard showing automation performance and agent cards"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════ AI OPPORTUNITY GUIDE ═════════════════════ -->
+  <section id="ai-opportunity-guide" class="agent-library-ai-start">
+    <div class="agent-library-ai-start-panel">
+      <div class="agent-library-ai-start-inner">
+        <div class="agent-library-ai-start-copy">
+          <div class="agent-library-ai-start-eyebrow">
+            <span></span>
+            AI Opportunity Guide
+          </div>
+          <h2 class="agent-library-ai-start-title">Not Sure Where to Start with AI?</h2>
+          <p class="agent-library-ai-start-description">
+            Explore KDS ERP Crew to identify the right AI opportunities for your business and turn them into practical, scalable solutions.
+          </p>
+          <a class="agent-library-ai-start-button" href="about.html#consultation-form">
+            Book a Demo
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="agent-library-ai-start-guide">
+          <div class="agent-library-ai-start-card">
+            <h3>Who It’s For:</h3>
+            <ul>
+              <li>Teams exploring AI adoption</li>
+              <li>Businesses scaling automation</li>
+              <li>Enterprises with complex workflows</li>
+            </ul>
+          </div>
+          <div class="agent-library-ai-start-card">
+            <h3>What You Can Do:</h3>
+            <ul>
+              <li>Build custom AI agents</li>
+              <li>Automate business processes</li>
+              <li>Connect with your existing ERP</li>
+              <li>Improve productivity and decision-making</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="site-footer">
+    <style>@media(min-width:768px){footer{padding-left:2.5rem!important;padding-right:2.5rem!important}}</style>
+    <div class="site-footer-content">
+      <div class="site-footer-grid">
+        <div class="site-footer-brand">
+          <img class="site-footer-logo" src="assets/images/kds-logo-footer.webp" alt="KDS ERP Crew" />
+          <h2 class="site-footer-heading">About Key Dynamics Solutions (KDS)</h2>
+          <p class="site-footer-about">
+            KDS ERP Crew is an AI-powered enterprise automation platform developed and owned by Key Dynamics Solutions. KDS empowers organizations with AI, ERP, CRM, Data Analytics, and Microsoft Power Platform solutions to simplify operations, automate business processes, and accelerate digital transformation.
+          </p>
+          <a class="site-footer-brand-link" href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Visit KDS Website →</a>
+        </div>
+
+        <div>
+          <h2 class="site-footer-heading">Agent Library</h2>
+          <ul class="site-footer-links">
+            <li><a href="agent-library.html#catalogue">O2C</a></li>
+            <li><a href="agent-library.html#catalogue">P2P</a></li>
+            <li><a href="agent-library.html#catalogue">Supply Chain</a></li>
+            <li><a href="agent-library.html#catalogue">Finance</a></li>
+            <li><a href="agent-library.html#catalogue">Platform</a></li>
+            <li><a href="agent-library.html#catalogue">Insurance</a></li>
+            <li><a href="agent-library.html#catalogue">Manufacturing</a></li>
+            <li><a href="agent-library.html#catalogue">Retail &amp; CPG</a></li>
+            <li><a href="agent-library.html#catalogue">Healthcare</a></li>
+            <li><a href="agent-library.html#catalogue">Trade Finance</a></li>
+            <li><a href="agent-library.html#catalogue">BFSI</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="site-footer-heading">Quick links</h2>
+          <ul class="site-footer-links">
+            <li><a href="about.html">About us</a></li>
+            <li><a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Blog</a></li>
+            <li><a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Case Studies</a></li>
+            <li><a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Privacy policy</a></li>
+            <li><a href="agent-library.html#catalogue">Agent Library</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer-contact">
+          <h2 class="site-footer-heading">Contact details</h2>
+          <ul class="site-footer-contact-list">
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>0-812 8th Floor EON Plot, No-01A, Sector 140A, Noida, Uttar Pradesh 201304</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>Khasra No. 385, 3rd Floor, Right Side, Chaudhary Balraj &amp; Sons, Ghitorni, Delhi – 110030</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>PID No.67-3,77/A, Koramangala Industrial Layout, JNC College Road, Bangalore-560095</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>Unit 79 Block 5, FF FinTech PRO, Engineering House, Western Business Parkway, Dublin, D12 NRY2, Ireland</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true">✉</span><a href="mailto:Sales@keydynamicssolutions.com">Sales@keydynamicssolutions.com</a></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true">☎</span><a href="tel:+919217719348">+91 9217719348</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto max-w-screen-2xl">
+      <div class="footer-inner">
+
+        <!-- Left: About -->
+        <div style="max-width:32rem">
+          <div class="flex items-center">
+            <img src="assets/images/kds-logo-footer.webp" alt="KDS ERP Crew" style="height:3.75rem;object-fit:contain;" />
+          </div>
+          <h3 class="text-hero-foreground" style="margin-top:1.5rem;font-size:1rem;font-weight:700;">About Key Dynamics Solutions (KDS)</h3>
+          <p class="text-hero-muted" style="margin-top:0.5rem;font-size:0.875rem;line-height:1.625;">
+            KDS ERP Crew is an AI-powered enterprise automation platform developed and owned by Key Dynamics Solutions. KDS empowers organizations with AI, ERP, CRM, Data Analytics, and Microsoft Power Platform solutions to simplify operations, automate business processes, and accelerate digital transformation.
+          </p>
+        </div>
+
+        <!-- Right: Want to know + Connect -->
+        <div class="footer-right">
+
+          <!-- Want to know more -->
+          <p class="text-hero-foreground" style="font-size:0.875rem;font-weight:600;">Want to know more about KDS?</p>
+          <p class="text-hero-muted" style="max-width:20rem;font-size:0.875rem;line-height:1.625;">Discover our solutions, services, and success stories by visiting the KDS website.</p>
+          <a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer"
+             class="footer-kds-link"
+             style="display:inline-flex;align-items:center;gap:0.25rem;font-size:0.875rem;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px;">
+            Visit KDS Website →
+          </a>
+
+          <!-- Divider -->
+          <div class="footer-divider"></div>
+
+          <h3 class="text-hero-foreground" style="font-size:1rem;font-weight:700;">Connect With KDS</h3>
+          <p class="text-hero-muted" style="max-width:20rem;font-size:0.875rem;line-height:1.625;">
+            Stay connected for the latest updates, AI innovations, ERP insights, and digital transformation stories.
+          </p>
+
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <a href="https://www.linkedin.com/company/key-dynamics-solutions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/KeyDynamicsSolutions/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://x.com/keydynamics_365" target="_blank" rel="noopener noreferrer" aria-label="X" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        <p class="text-hero-muted" style="font-size:0.75rem;">© 2026 Key Dynamics Solutions Pvt. Ltd. All Rights Reserved. KDS ERP Crew™ is a product of Key Dynamics Solutions.</p>
+      </div>
+
+    </div>
+  </footer>
+  <section class="site-footer-social-bar" aria-label="Social links and copyright">
+    <div class="site-footer-social-inner">
+      <p class="site-footer-social-copy">© 2026 – All Rights Reserved Key Dynamics Solutions PVT LTD | Designed by KDS</p>
+      <nav class="site-footer-social-links" aria-label="KDS social media">
+        <a class="site-footer-social-link" href="https://www.facebook.com/KeyDynamicsSolutions/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+        <a class="site-footer-social-link site-footer-social-link--instagram" href="https://www.instagram.com/keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
+        <a class="site-footer-social-link site-footer-social-link--youtube" href="https://www.youtube.com/@keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube">▶</a>
+        <a class="site-footer-social-link site-footer-social-link--linkedin" href="https://www.linkedin.com/company/key-dynamics-solutions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a class="site-footer-social-link" href="https://x.com/keydynamics_365" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
+        <a class="site-footer-social-link site-footer-social-link--pinterest" href="https://in.pinterest.com/keydynamics_365/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">p</a>
+        <a class="site-footer-social-link site-footer-social-link--medium" href="https://medium.com/@keydynamicssolutionss" target="_blank" rel="noopener noreferrer" aria-label="Medium">M</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ DEMO MODAL ═══════════════════════════ -->
+  <div id="demo-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+    <div id="demo-modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm"></div>
+    <div class="fixed inset-0 flex items-center justify-center p-4">
+      <div class="relative w-full max-w-lg rounded-xl bg-white shadow-2xl p-6">
+        <button id="demo-modal-close" class="absolute right-4 top-4 rounded-sm p-1 opacity-70 hover:opacity-100 transition" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div>
+          <div class="mb-2 inline-flex w-fit items-center gap-2 rounded-full bg-brand-soft px-2.5 py-1 text-xs font-semibold text-brand">
+            <span id="demo-modal-cat"></span>
+          </div>
+          <h2 id="demo-modal-title" class="text-xl font-bold text-foreground mt-1"></h2>
+          <p id="demo-modal-desc" class="mt-2 text-sm leading-relaxed text-muted-foreground"></p>
+        </div>
+        <div class="mt-4 flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-8 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#2ababe"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          <p class="mt-3 text-sm font-medium">Demo video unavailable in this export</p>
+          <p class="mt-1 text-xs text-muted-foreground">On the live site this opens a full agent demo video.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ CONTACT MODAL ═══════════════════════════ -->
+  <div id="contact-modal" class="contact-modal hidden" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-hidden="true">
+    <div class="contact-modal-backdrop" data-contact-modal-close></div>
+    <div class="contact-modal-dialog" role="document">
+      <button type="button" class="contact-modal-close" data-contact-modal-close aria-label="Close contact form">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="contact-modal-heading">
+        <span class="contact-modal-eyebrow">Let's connect</span>
+        <h2 id="contact-modal-title">Schedule your AI audit</h2>
+        <p>Tell us a little about your business and our team will help you find the right next step.</p>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <div class="contact-form-field">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required />
+        </div>
+        <div class="contact-form-field">
+          <label for="contact-email">Work email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+        </div>
+        <div class="contact-form-field">
+          <label for="contact-company">Company name</label>
+          <input id="contact-company" name="company" type="text" autocomplete="organization" placeholder="Your company" required />
+        </div>
+        <div class="contact-form-field">
+          <label for="contact-country">Country</label>
+          <input id="contact-country" name="country" type="text" autocomplete="country-name" placeholder="Your country" required />
+        </div>
+        <div class="contact-form-field contact-form-field--full">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="4" placeholder="What would you like to explore?"></textarea>
+        </div>
+        <button type="submit" class="contact-form-submit">Submit request <span aria-hidden="true">→</span></button>
+      </form>
+      <div id="contact-form-success" class="contact-form-success hidden" role="status" aria-live="polite">
+        <span class="contact-form-success-icon" aria-hidden="true">✓</span>
+        <h3>Thanks — we’ve received your request.</h3>
+        <p>Our team will be in touch shortly to arrange your AI audit or free call.</p>
+        <button type="button" class="contact-form-success-close" data-contact-modal-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ AGENT CHAT WIDGET ═══════════════════════════ -->
+  <aside id="agent-chat-widget" class="agent-chat-widget is-open" aria-label="Try your matched KDS ERP Crew agent">
+    <button id="agent-chat-launcher" class="agent-chat-launcher" type="button" aria-expanded="true" aria-controls="agent-chat-panel">
+      <span class="agent-chat-launcher-dot" aria-hidden="true"></span>
+      <span class="agent-chat-launcher-label">Try your matched agent</span>
+      <svg class="agent-chat-launcher-icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+    </button>
+    <div id="agent-chat-panel" class="agent-chat-panel" role="dialog" aria-modal="false" aria-labelledby="agent-chat-title">
+      <div class="agent-chat-panel-header">
+        <div>
+          <p class="agent-chat-eyebrow">Try the agent you just matched with</p>
+          <h2 id="agent-chat-title">Experience a real KDS ERP Crew conversation</h2>
+          <p class="agent-chat-subtitle">Click a prompt or type your own.</p>
+        </div>
+        <button id="agent-chat-close" class="agent-chat-close" type="button" aria-label="Minimize agent chat">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="agent-chat-agent">
+        <span class="agent-chat-agent-status" aria-hidden="true"></span>
+        <div><strong id="agent-chat-agent-name">Supply Chain Optimization Agent</strong><span id="agent-chat-agent-meta">Supply Chain · ERP</span></div>
+      </div>
+      <div id="agent-chat-prompts" class="agent-chat-prompts">
+        <button type="button" class="agent-chat-prompt">What’s the current status of our supply chain?</button>
+        <button type="button" class="agent-chat-prompt">Identify potential supply chain disruptions</button>
+        <button type="button" class="agent-chat-prompt">Recommend actions to improve fulfillment</button>
+      </div>
+      <div id="agent-chat-messages" class="agent-chat-messages" aria-live="polite">
+        <div id="agent-chat-greeting" class="agent-chat-message agent-chat-message--bot">Hi, I’m KDS ERP Crew. I analyze procurement, inventory, supplier, and order data to identify risks, optimize supply planning, and support faster, smarter supply chain decisions.</div>
+      </div>
+      <form id="agent-chat-form" class="agent-chat-composer">
+        <label class="sr-only" for="agent-chat-input">Type a request for your matched agent</label>
+        <input id="agent-chat-input" type="text" autocomplete="off" placeholder="Type a request, or tap a suggestion above…" />
+        <button type="submit" aria-label="Send message"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ═════════════════════════ SCRIPTS ═════════════════════════ -->
+  <script src="js/data.js"></script>
+  <script src="js/agent-library.js"></script>
+  <script src="js/contact-modal.js?v=contact-form-20260902"></script>
+  <script src="js/agent-chat.js?v=agent-chat-20260902-2"></script>
+</body>
+</html>

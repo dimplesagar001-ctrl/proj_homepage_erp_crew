@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enterprise AI Agent Catalogue — KDS ERP Crew</title>
+  <meta name="description" content="A comprehensive library of enterprise AI agents built to automate, orchestrate, and optimize business processes across Microsoft Dynamics 365." />
+  <meta property="og:title" content="Enterprise AI Agent Catalogue — KDS ERP Crew" />
+  <meta property="og:description" content="90+ enterprise AI agents for Microsoft Dynamics 365 across Finance, Sales, Procurement, Supply Chain, Manufacturing, Retail, Healthcare, BFSI, Insurance, and more." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- Inter font: bundled for offline use; Google Fonts as online enhancement -->
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('assets/fonts/inter.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Additional styles for components not covered by utility classes */
+    .hero-bg-layer img { transition: transform 6s ease-out, opacity 0.7s ease; }
+    .modal-open { overflow: hidden; }
+    .line-clamp-4 { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+    /* Keep hero copy visually balanced across all six slides. */
+    #hero-heading {
+      max-width: 24ch;
+      min-height: 2.1em;
+    }
+    #hero-desc {
+      max-width: 52ch;
+      min-height: 4.5em;
+    }
+    .hero-content-stack,
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .hero-controls {
+      width: fit-content;
+      max-width: 100%;
+      min-width: 0;
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .hero-cta-row {
+      width: fit-content;
+      max-width: 100%;
+    }
+    .hero-stats-grid {
+      width: 100%;
+      min-width: 0;
+      contain: inline-size;
+    }
+    .hero-stats-grid > * {
+      min-width: 0;
+    }
+    .hero-background-image { object-position: center top; }
+    @media (max-width: 767px) {
+      #hero-heading { max-width: 20ch; }
+      #hero-desc { max-width: 40ch; }
+      .hero-background-image { object-position: left top; }
+    }
+    @media (min-width: 768px) {
+      .hero-content-stack,
+      .hero-copy,
+      .hero-controls {
+        gap: 48px;
+      }
+    }
+
+    /* ── Classes missing from the compiled Tailwind snapshot ── */
+
+    /* Flex / layout */
+    .justify-end { justify-content: flex-end }
+
+    /* Spacing – fixed-pixel arbitrary values */
+    .mt-\[30px\]  { margin-top: 30px }
+    .mb-10        { margin-bottom: 2.5rem }
+    .pb-\[85px\]  { padding-bottom: 85px }
+    @media (min-width: 768px) {
+      .md\:mb-\[70px\] { margin-bottom: 70px }
+      .md\:mt-\[70px\] { margin-top: 70px }
+    }
+
+    /* Typography – arbitrary font sizes */
+    .text-\[2\.55rem\]   { font-size: 2.55rem }
+    @media (min-width: 768px) {
+      .md\:text-\[3\.1875rem\] { font-size: 3.1875rem }
+    }
+
+    /* Colours with opacity modifiers */
+    .text-white\/90   { color: rgb(255 255 255 / 0.9) }
+    .text-white\/80   { color: rgb(255 255 255 / 0.8) }
+    .bg-white\/10     { background-color: rgb(255 255 255 / 0.1) }
+    .bg-white\/20     { background-color: rgb(255 255 255 / 0.2) }
+    .border-white\/20 { border-color: rgb(255 255 255 / 0.2) }
+
+    /* Grid */
+    @media (min-width: 768px) {
+      .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    @media (min-width: 768px) {
+      .footer-inner { flex-direction: row; align-items: flex-start; }
+    }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .footer-right { align-items: flex-end; text-align: right; align-self: flex-start; }
+    }
+    .footer-divider {
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    .footer-social-btn {
+      display: flex;
+      height: 2.25rem;
+      width: 2.25rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      background-color: rgba(255,255,255,0.10);
+      color: #fff;
+      transition: background-color 0.15s;
+    }
+    .footer-social-btn:hover { background-color: rgba(255,255,255,0.25); }
+    .footer-kds-link { transition: opacity 0.15s; }
+    .footer-kds-link:hover { opacity: 0.80; }
+    .footer-copyright {
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 1.5rem;
+    }
+
+    /* ── Demo Steps Section ──────────────────────────────────────── */
+    /* Card inner: column on mobile, row on desktop */
+    .dsc-inner {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 1.5rem;
+      background-color: #fff;
+    }
+    @media (min-width: 768px) {
+      .dsc-inner { flex-direction: row; }
+    }
+
+    /* Image panel */
+    .dsc-img-panel {
+      position: relative;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: #ede8e1;
+      height: 52vw;
+      max-height: 340px;
+      min-height: 180px;
+    }
+    @media (min-width: 768px) {
+      .dsc-img-panel {
+        height: 100%;
+        max-height: none;
+        min-height: 0;
+        width: 60%;
+      }
+    }
+    .dsc-img-panel img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    /* Text panel */
+    .dsc-text-panel {
+      position: relative;
+      display: flex;
+      flex: 1 1 0%;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 1.75rem;
+    }
+    .dsc-step-number {
+      position: absolute;
+      right: 2.5rem;
+      bottom: 1.5rem;
+      z-index: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+    @media (min-width: 768px) {
+      .dsc-text-panel { padding: 2.5rem; }
+    }
+    @media (min-width: 1024px) {
+      .dsc-text-panel { padding: 3rem; }
+    }
+
+    /* Step heading */
+    .dsc-heading {
+      margin-top: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #051895;
+    }
+    @media (min-width: 768px) {
+      .dsc-heading { font-size: 1.5rem; }
+    }
+    @media (min-width: 1024px) {
+      .dsc-heading { font-size: 1.625rem; }
+    }
+
+    /* Card stack container responsive padding */
+    .dsc-stack-container {
+      position: relative;
+      display: flex;
+      flex: 1 1 0%;
+      align-items: center;
+      justify-content: center;
+      overflow: clip;
+      padding: 0 1rem 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .dsc-stack-container { padding: 0 2.5rem 2rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/responsive.css?v=transformation-3d-light-20261007-business-benefits-center-20261007-demo-surface-20261007-orbit-icon-20261007-key-capability-titles-20261007-demo-step-number-placement-20261007-ai-coworker-background-20261007-faq-heading-royal-blue-20261007-ai-coworker-compact-20261007-faq-call-button-20261007-transformation-compact-20261007" />
+</head>
+<body class="bg-background text-foreground">
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
+    <div class="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-3 md:px-10">
+      <!-- Logo -->
+      <a href="index.html">
+        <img src="assets/images/kds-logo-header.webp" alt="KDS ERP Crew" class="h-[3.75rem] object-contain" />
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden items-center gap-8 md:flex">
+        <nav class="flex items-center gap-8">
+          <a href="index.html" class="text-[15.4px] font-medium text-gray-700 transition hover:text-[#051895]">Home</a>
+          <a href="agent-library.html" class="text-[15.4px] font-medium text-gray-700 transition hover:text-[#051895]">Agent Library</a>
+          <a href="about.html" class="text-[15.4px] font-medium text-gray-700 transition hover:text-[#051895]">About Us</a>
+        </nav>
+        <button type="button" data-contact-modal-trigger
+           class="inline-flex items-center rounded-md px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
+           style="background-color:#051895">Schedule Your AI Audit</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ HERO SECTION ═══════════════════════════════ -->
+  <section id="hero-section" class="relative overflow-clip flex flex-col" style="height:max(44rem,calc(100svh - var(--header-h,5.375rem) - 45px));min-height:max(44rem,calc(100svh - var(--header-h,5.375rem) - 45px))">
+
+    <!-- Background layers (crossfade) -->
+    <div class="hero-bg-layer pointer-events-none absolute inset-0 duration-700 transition-opacity" style="z-index:1;opacity:1;">
+      <img src="assets/images/hero-slide-1.webp" alt="" width="5197" height="2079" loading="eager" decoding="async" class="hero-background-image h-full w-full object-cover object-top" style="transform:scale(1.03)" />
+    </div>
+    <div class="hero-bg-layer pointer-events-none absolute inset-0 duration-700 transition-opacity" style="z-index:0;opacity:0;">
+      <img src="assets/images/hero-slide-2.webp" alt="" width="5197" height="2079" loading="lazy" decoding="async" class="hero-background-image h-full w-full object-cover object-top" />
+    </div>
+    <div class="hero-bg-layer pointer-events-none absolute inset-0 duration-700 transition-opacity" style="z-index:0;opacity:0;">
+      <img src="assets/images/hero-slide-4.webp" alt="" width="5197" height="2079" loading="lazy" decoding="async" class="hero-background-image h-full w-full object-cover object-top" />
+    </div>
+    <div class="hero-bg-layer pointer-events-none absolute inset-0 duration-700 transition-opacity" style="z-index:0;opacity:0;">
+      <img src="assets/images/hero-slide-5.webp" alt="" width="5197" height="2079" loading="lazy" decoding="async" class="hero-background-image h-full w-full object-cover object-top" />
+    </div>
+    <div class="hero-bg-layer pointer-events-none absolute inset-0 duration-700 transition-opacity" style="z-index:0;opacity:0;">
+      <img src="assets/images/hero-slide-6.webp" alt="" width="5197" height="2079" loading="lazy" decoding="async" class="hero-background-image h-full w-full object-cover object-top" />
+    </div>
+
+
+    <!-- Content -->
+    <div class="relative z-10 mx-auto flex w-full max-w-screen-2xl flex-1 flex-col px-6 pt-10 md:px-10 md:pt-14">
+      <div class="hero-content-stack mt-14 flex flex-1 flex-col justify-end max-w-5xl md:mt-20 pb-[85px]">
+
+        <!-- Heading + description -->
+        <div id="hero-text" class="hero-copy transition-all duration-300" style="opacity:1;transform:translateY(0)">
+          <h1 id="hero-heading" class="font-bold leading-[1.05] tracking-tight text-[2.55rem] md:text-[3.1875rem] text-white">
+            <span class="block">Digital Transaction</span>
+            <span class="block">Management Assistant</span>
+          </h1>
+          <p id="hero-desc" class="text-base leading-relaxed text-white/90 md:text-lg">
+            Transform ERP transactions into intelligent, AI-driven workflows that improve visibility, accelerate approvals, and streamline business operations.
+          </p>
+        </div>
+
+        <!-- CTA buttons -->
+        <div class="hero-controls">
+        <div class="hero-cta-row flex flex-wrap items-center gap-3">
+          <button id="hero-btn-highlights"
+            class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-brand-foreground shadow-lg transition hover:brightness-110"
+            style="background-color:#2ababe">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+            Agent Highlights
+          </button>
+          <button id="hero-btn-catalogue"
+            class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition hover:brightness-110"
+            style="background-color:#051895">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Complete AI Agent Catalogue
+          </button>
+          <a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition hover:brightness-110"
+            style="background-color:#fba226">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            Back to Key Dynamic Solutions
+          </a>
+        </div>
+
+        <!-- Stats grid (populated by JS) -->
+        <div id="hero-stats" class="hero-stats-grid grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav arrows -->
+    <button id="hero-prev" aria-label="Previous slide"
+      class="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md backdrop-blur transition hover:bg-white md:left-6">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-700"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button id="hero-next" aria-label="Next slide"
+      class="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md backdrop-blur transition hover:bg-white md:right-6">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-700"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+
+    <!-- Pagination dots -->
+    <div class="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+      <button class="hero-dot h-2.5 rounded-full transition-all duration-300" aria-label="Go to slide 1" style="width:2rem;background-color:#051895"></button>
+      <button class="hero-dot h-2.5 rounded-full transition-all duration-300" aria-label="Go to slide 2" style="width:0.625rem;background-color:rgba(5,24,149,0.3)"></button>
+      <button class="hero-dot h-2.5 rounded-full transition-all duration-300" aria-label="Go to slide 3" style="width:0.625rem;background-color:rgba(5,24,149,0.3)"></button>
+      <button class="hero-dot h-2.5 rounded-full transition-all duration-300" aria-label="Go to slide 4" style="width:0.625rem;background-color:rgba(5,24,149,0.3)"></button>
+      <button class="hero-dot h-2.5 rounded-full transition-all duration-300" aria-label="Go to slide 5" style="width:0.625rem;background-color:rgba(5,24,149,0.3)"></button>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════ HIGHLIGHTS SECTION ═════════════════════════ -->
+  <section id="highlights" class="highlights-section">
+    <div class="highlights-section-inner">
+      <div class="highlights-heading">
+        <div class="highlights-eyebrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1-1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          Agent Highlights
+        </div>
+        <h2>Experience AI Agents in Action</h2>
+        <p>Discover featured KDS ERP Crew AI agents built for Microsoft Dynamics 365. Explore intelligent solutions across Order to Cash, Procure to Pay, Supply Chain, Finance, Manufacturing, Retail, Healthcare, BFSI, and more.</p>
+      </div>
+
+      <div class="highlights-category-strip" aria-label="Agent categories">
+        <span class="highlights-category-heading">Explore by category</span>
+        <div id="highlights-tab-bar" class="highlights-category-list"></div>
+      </div>
+
+      <div class="highlights-results">
+        <div class="highlights-results-header">
+          <p class="highlights-results-count">
+            <span id="highlights-count"></span>
+            <span class="highlights-results-suffix">with live video demos</span>
+          </p>
+          <button id="highlights-browse-btn" class="highlights-browse-link">
+            <span id="highlights-hint"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <div class="highlights-carousel">
+          <button id="highlights-prev" class="highlights-carousel-arrow" type="button" aria-label="Previous agent highlights">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <div id="highlights-grid" class="highlights-carousel-track"></div>
+          <button id="highlights-next" class="highlights-carousel-arrow" type="button" aria-label="Next agent highlights">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="highlights-bottom-cta">
+        <div>
+          <p>Need something more specialised?</p>
+          <span>Explore the complete KDS ERP Crew AI Agent Library with 90+ agents across all industries and process categories.</span>
+        </div>
+        <a href="agent-library.html">
+          Browse Full Catalogue
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ BUSINESS BENEFITS ═══════════════════════ -->
+  <section id="business-benefits" class="business-benefits" aria-labelledby="business-benefits-heading">
+    <div class="business-benefits-inner">
+      <header class="key-capabilities-heading">
+        <h2 id="business-benefits-heading" class="ai-coworker-section-heading key-capabilities-heading-title">How KDS ERP Crew Helps Businesses</h2>
+      </header>
+
+      <div class="business-benefits-layout">
+        <ul class="business-benefits-list" aria-label="Execution and visibility benefits">
+          <li class="business-benefit">
+            <span class="business-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M5 25V13h7v12M14 25V6h7v19M23 25v-9h5v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m6 9 6-4 5 2 8-4M22 3h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="business-benefit-copy">
+              <h3>Faster ERP Execution</h3>
+              <p>Simplify complex ERP tasks with AI-powered interactions.</p>
+            </div>
+            <div class="business-benefit-metric"><strong>~40%</strong><span>Faster task processing</span></div>
+          </li>
+          <li class="business-benefit">
+            <span class="business-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2"/><path d="M10 16.5 14 20l8-9M16 2v4M16 26v4M2 16h4M26 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="business-benefit-copy">
+              <h3>Intelligent Approvals</h3>
+              <p>Route, prioritize, escalate, and track approvals automatically.</p>
+            </div>
+            <div class="business-benefit-metric"><strong>~40%</strong><span>Faster Approvals</span></div>
+          </li>
+          <li class="business-benefit">
+            <span class="business-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="11" height="9" rx="2" stroke="currentColor" stroke-width="2"/><rect x="18" y="18" width="11" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M14 9h5a4 4 0 0 1 4 4v5M18 23h-5a4 4 0 0 1-4-4v-5M16 7l3 2-3 2M16 21l-3 2 3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="business-benefit-copy">
+              <h3>Cross-ERP Visibility</h3>
+              <p>Connect data across multiple ERP systems and applications.</p>
+            </div>
+            <div class="business-benefit-metric"><strong>~40%</strong><span>Faster Reporting</span></div>
+          </li>
+        </ul>
+
+        <div class="business-benefits-orbit" role="img" aria-label="KDS ERP Crew connects intelligent AI agents across your business">
+          <span class="business-orbit-ring business-orbit-ring-outer"></span>
+          <span class="business-orbit-ring business-orbit-ring-middle"></span>
+          <span class="business-orbit-ring business-orbit-ring-inner"></span>
+          <i class="business-orbit-dot business-orbit-dot-one"></i>
+          <i class="business-orbit-dot business-orbit-dot-two"></i>
+          <i class="business-orbit-dot business-orbit-dot-three"></i>
+          <i class="business-orbit-dot business-orbit-dot-four"></i>
+          <div class="business-orbit-mark">
+            <img src="assets/images/kds-mark-faq.webp" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
+
+        <ul class="business-benefits-list" aria-label="Automation and governance benefits">
+          <li class="business-benefit">
+            <span class="business-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8m11.4 11.4 2.8 2.8m0-17-2.8 2.8M10.3 21.7l-2.8 2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="16" r="7" stroke="currentColor" stroke-width="2"/><path d="m14 16 1.5 1.5L19 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="business-benefit-copy">
+              <h3>Transaction &amp; Workflow Automation</h3>
+              <p>Automate transactions, workflows, checks, and repetitive tasks.</p>
+            </div>
+            <div class="business-benefit-metric"><strong>~60%</strong><span>Less Manual Effort</span></div>
+          </li>
+          <li class="business-benefit">
+            <span class="business-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M4 26h24M7 22v-6h5v6M14 22V9h5v13M21 22v-9h5v9M7 11l6-5 5 2 7-5M22 3h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="business-benefit-copy">
+              <h3>Real-Time Insights</h3>
+              <p>Turn ERP data into KPIs, dashboards &amp; insights.</p>
+            </div>
+            <div class="business-benefit-metric"><strong>~50%</strong><span>Faster Insights</span></div>
+          </li>
+          <li class="business-benefit">
+            <span class="business-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M16 3 27 7v8c0 7-4.7 11.7-11 14-6.3-2.3-11-7-11-14V7l11-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m11 16 3.2 3.2L21.5 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="business-benefit-copy">
+              <h3>Governed AI Execution</h3>
+              <p>Apply approvals, rules &amp; audit controls.</p>
+            </div>
+            <div class="business-benefit-metric"><strong>~100%</strong><span>Audit trail coverage</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ AI CO-WORKER SECTION ═══════════════════════ -->
+  <section id="ai-co-worker-section" class="relative w-full overflow-hidden bg-white">
+    <div class="ai-coworker-inner relative z-10 mx-auto max-w-screen-2xl px-6 py-20 md:px-10 md:py-24">
+      <!-- Top: section heading and content -->
+      <div class="ai-coworker-intro">
+        <h2 class="ai-coworker-section-heading text-4xl font-extrabold leading-tight tracking-tight md:text-5xl" style="color:#051895;text-align:center">
+          What your AI co-worker can do
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-slate-600" style="padding-right:0;text-align:center">
+          KDS ERP Crew deploys intelligent AI agents that work alongside your teams inside Microsoft Dynamics&nbsp;365 — automating repetitive tasks, surfacing real-time insights, and orchestrating complex workflows so your people can focus on what matters most.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a href="agent-library.html"
+            class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+            style="background:#051895">
+            Explore Agent Library
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#highlights" onclick="event.preventDefault();document.getElementById('highlights').scrollIntoView({behavior:'smooth'})"
+            class="inline-flex items-center gap-2 rounded-full border-2 px-6 py-3 text-sm font-semibold transition hover:bg-slate-50"
+            style="border-color:#051895;color:#051895">
+            See Live Demos
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom: supplied visual on the left, rotating feature list on the right -->
+      <div class="ai-coworker-feature-grid">
+        <div class="ai-coworker-visual">
+          <img src="assets/images/ai-crew-base.webp" alt="AI Crew Base dashboard for deploying and managing an ERP AI crew" loading="lazy" draggable="false" />
+        </div>
+
+        <div class="ai-coworker-features">
+          <p class="ai-coworker-features-label">What your AI co-worker can do</p>
+          <div id="wheel-container" aria-label="AI co-worker capabilities"
+            style="position:relative;height:360px;overflow:hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ KEY CAPABILITIES ═══════════════════════ -->
+  <section id="key-capabilities" class="key-capabilities-section" aria-labelledby="key-capabilities-heading">
+    <div class="key-capabilities-inner">
+      <header class="key-capabilities-heading">
+        <h2 id="key-capabilities-heading" class="ai-coworker-section-heading key-capabilities-heading-title">Key Capabilities</h2>
+      </header>
+
+      <ol class="key-capabilities-grid" aria-label="Key capabilities">
+        <li class="key-capability">
+          <span class="key-capability-number" aria-hidden="true">01</span>
+          <div class="key-capability-copy">
+            <h3>AI Engine</h3>
+            <p>Ask → Analyse → Act → Govern</p>
+          </div>
+          <span class="key-capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M11 8.5a4.5 4.5 0 0 1 8.7-1.5 4 4 0 0 1 3.8 6.1 4.4 4.4 0 0 1-.8 8.5 4.5 4.5 0 0 1-8.7 1.5 4 4 0 0 1-3.8-6.1 4.4 4.4 0 0 1 .8-8.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 12h8m-8 4h8m-8 4h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="24.5" cy="8" r="3.5" fill="#e9f8f8" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+        </li>
+        <li class="key-capability">
+          <span class="key-capability-number" aria-hidden="true">02</span>
+          <div class="key-capability-copy">
+            <h3>24×7 90+ AI Agents</h3>
+            <p>Invoicing, Collections, Approvals &amp; Support</p>
+          </div>
+          <span class="key-capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M4 17.5 9 13l5.5 1.2 3.2 3.1a2 2 0 0 1-2.8 2.9l-2.3-2M28 16l-4.5-4.5-5.2 1-3 2.8M6 21l3.5 3.5a2 2 0 0 0 2.8 0l.8-.8M17 21l1.2 1.2a2 2 0 0 0 2.8 0l.8-.8M21 18.5l1.4 1.4a2 2 0 0 0 2.8 0l.8-.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="7" r="4" fill="#e9f8f8" stroke="currentColor" stroke-width="1.5"/><path d="m22.5 7 1 1 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </li>
+        <li class="key-capability">
+          <span class="key-capability-number" aria-hidden="true">03</span>
+          <div class="key-capability-copy">
+            <h3>ERP Integration</h3>
+            <p>ERP, Email, Documents &amp; Data</p>
+          </div>
+          <span class="key-capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="18" y="18" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M18 9h4a3 3 0 0 1 3 3v6m-11 5h-4a3 3 0 0 1-3-3v-6m10-5 2-2m-2 2 2 2m-7 11-2-2m2 2-2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="9.5" r="1.3" fill="currentColor"/><circle cx="22.5" cy="22.5" r="1.3" fill="currentColor"/></svg>
+          </span>
+        </li>
+        <li class="key-capability">
+          <span class="key-capability-number" aria-hidden="true">04</span>
+          <div class="key-capability-copy">
+            <h3>End-to-End Automation</h3>
+            <p>Trigger → Execute → Close</p>
+          </div>
+          <span class="key-capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.8"/><path d="m16 3 1.5 3.2 3.5.7 2.7-2 2.4 2.4-2 2.7.7 3.5 3.2 1.5v3.4l-3.2 1.5-.7 3.5 2 2.7-2.4 2.4-2.7-2-3.5.7L16 30h-3.4l-1.5-3.2-3.5-.7-2.7 2-2.4-2.4 2-2.7-.7-3.5L1 18v-3.4l3.2-1.5.7-3.5-2-2.7 2.4-2.4 2.7 2 3.5-.7L13 3h3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </span>
+        </li>
+        <li class="key-capability">
+          <span class="key-capability-number" aria-hidden="true">05</span>
+          <div class="key-capability-copy">
+            <h3>Human-in-the-Loop</h3>
+            <p>Smart Approval &amp; Escalation</p>
+          </div>
+          <span class="key-capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M8 26v-2a8 8 0 0 1 16 0v2H8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m22 7 2 2 4-4M4 9V5m0 0L2 7m2-2 2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </li>
+        <li class="key-capability">
+          <span class="key-capability-number" aria-hidden="true">06</span>
+          <div class="key-capability-copy">
+            <h3>Multi-Channel Connectivity</h3>
+            <p>Connect ERP, Teams, Outlook &amp; other Apps.</p>
+          </div>
+          <span class="key-capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="5" cy="7" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="27" cy="7" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="25" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="27" cy="25" r="2.5" stroke="currentColor" stroke-width="1.6"/><path d="m7 9 6 5m12-5-6 5M7 23l6-5m12 5-6-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 16h6m-3-3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════════ AI-POWERED BUSINESS TRANSFORMATION ═══════════════ -->
+  <section id="transformation-section" class="transformation-section" aria-labelledby="transformation-heading">
+    <div class="transformation-inner">
+      <div class="transformation-intro">
+        <p class="transformation-eyebrow">AI transformation framework</p>
+        <h2 id="transformation-heading">
+          KDS ERP Crew <span>— AI-Powered Business Transformation</span>
+        </h2>
+        <p>
+          KDS ERP Crew helps organizations move from AI experimentation to real business impact by embedding intelligent agents into everyday workflows.
+        </p>
+      </div>
+
+      <div class="transformation-framework">
+        <div class="transformation-tabs" role="tablist" aria-label="AI transformation framework">
+          <button id="transformation-tab-automate" class="transformation-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="transformation-panel-automate" data-transformation-tab="automate">
+            <span class="transformation-tab-topline">
+              <span class="transformation-tab-number">01</span>
+              <span class="transformation-tab-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="transformation-tab-title">Automate</span>
+            <span class="transformation-tab-description">Turn repetitive work into intelligent workflows.</span>
+          </button>
+
+          <button id="transformation-tab-scale" class="transformation-tab" type="button" role="tab" aria-selected="false" aria-controls="transformation-panel-scale" data-transformation-tab="scale" tabindex="-1">
+            <span class="transformation-tab-topline">
+              <span class="transformation-tab-number">02</span>
+              <span class="transformation-tab-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="transformation-tab-title">Scale</span>
+            <span class="transformation-tab-description">Expand AI across every business function.</span>
+          </button>
+
+          <button id="transformation-tab-govern" class="transformation-tab" type="button" role="tab" aria-selected="false" aria-controls="transformation-panel-govern" data-transformation-tab="govern" tabindex="-1">
+            <span class="transformation-tab-topline">
+              <span class="transformation-tab-number">03</span>
+              <span class="transformation-tab-arrow" aria-hidden="true">↗</span>
+            </span>
+            <span class="transformation-tab-title">Govern</span>
+            <span class="transformation-tab-description">Make enterprise AI secure and accountable.</span>
+          </button>
+        </div>
+
+        <div class="transformation-panels">
+          <article id="transformation-panel-automate" class="transformation-panel is-active" role="tabpanel" aria-labelledby="transformation-tab-automate" data-transformation-panel="automate">
+            <div class="transformation-panel-copy">
+              <p class="transformation-panel-kicker">01 / Automate</p>
+              <h3>Move from manual effort to intelligent action.</h3>
+              <p>Transform repetitive processes with AI-powered agents and intelligent workflows that help your teams move faster with fewer handoffs.</p>
+              <a class="transformation-panel-link" href="#agents-in-action-section" onclick="event.preventDefault();scrollToSection('agents-in-action-section')">
+                Explore AI workflows
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <div class="transformation-panel-image">
+              <img src="assets/images/ai-transformation-scale.webp" alt="Digital AI assistant floating above an open hand beside a laptop" loading="lazy" />
+              <span class="transformation-image-orbit" aria-hidden="true"></span>
+            </div>
+          </article>
+
+          <article id="transformation-panel-scale" class="transformation-panel" role="tabpanel" aria-labelledby="transformation-tab-scale" data-transformation-panel="scale" hidden>
+            <div class="transformation-panel-copy">
+              <p class="transformation-panel-kicker">02 / Scale</p>
+              <h3>Give every function an intelligent co-worker.</h3>
+              <p>Expand AI across business functions with configurable agents, reusable workflows, and the flexibility to bring the right models to every use case.</p>
+              <a class="transformation-panel-link" href="#highlights" onclick="event.preventDefault();scrollToSection('highlights')">
+                Browse agent highlights
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <div class="transformation-panel-image">
+              <img src="assets/images/ai-transformation-scale.webp" alt="Digital AI assistant floating above an open hand beside a laptop" loading="lazy" />
+              <span class="transformation-image-orbit" aria-hidden="true"></span>
+            </div>
+          </article>
+
+          <article id="transformation-panel-govern" class="transformation-panel" role="tabpanel" aria-labelledby="transformation-tab-govern" data-transformation-panel="govern" hidden>
+            <div class="transformation-panel-copy">
+              <p class="transformation-panel-kicker">03 / Govern</p>
+              <h3>Build trust into every AI decision.</h3>
+              <p>Enable secure, controlled AI adoption with enterprise-focused governance, auditable actions, and human oversight where it matters most.</p>
+            </div>
+            <div class="transformation-panel-image">
+              <img src="assets/images/ai-transformation-govern.webp" alt="Laptop displaying digital security locks and governance controls" loading="lazy" />
+              <span class="transformation-image-orbit" aria-hidden="true"></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ AI AGENTS IN ACTION ═══════════════════════ -->
+  <section id="agents-in-action-section" class="agents-action-section" aria-labelledby="agents-action-heading">
+    <div class="agents-action-inner">
+      <div class="agents-action-intro">
+        <p class="agents-action-eyebrow">AI-powered workflows</p>
+        <h2 id="agents-action-heading">AI Agents in Action</h2>
+        <p>Discover how KDS ERP Crew applies intelligent AI agents across business functions to automate workflows, improve productivity, and enable faster, smarter decisions.</p>
+      </div>
+
+      <div class="agents-action-experience">
+        <div class="agents-action-tabs" role="group" aria-label="AI agent workflows">
+          <div class="agents-action-tab-group is-active">
+            <button id="agents-action-tab-approvals" class="agents-action-tab is-active" type="button" aria-expanded="true" aria-controls="agents-action-panel-approvals" data-agent-action-tab="approvals">
+              <span class="agents-action-tab-number" aria-hidden="true">01</span>
+              <span class="agents-action-tab-title">Intelligent Approvals</span>
+            </button>
+            <article id="agents-action-panel-approvals" class="agents-action-panel is-active" role="region" aria-labelledby="agents-action-tab-approvals" data-agent-action-panel="approvals">
+              <div class="agents-action-image-wrap">
+                <img src="assets/images/intelligent-approvals.webp" alt="Business professional working with approval and analytics workflows" loading="lazy" />
+              </div>
+              <div class="agents-action-card-body">
+                <p class="agents-action-card-label">Workflow intelligence</p>
+                <h3>Intelligent Approvals</h3>
+                <p class="agents-action-description">Automate approval workflows, route requests intelligently, and reduce processing delays.</p>
+                <button class="agents-action-case-study-button" type="button" disabled title="Full case study link coming soon">
+                  Read full case study <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="agents-action-tab-group">
+            <button id="agents-action-tab-finance" class="agents-action-tab" type="button" aria-expanded="false" aria-controls="agents-action-panel-finance" data-agent-action-tab="finance">
+              <span class="agents-action-tab-number" aria-hidden="true">02</span>
+              <span class="agents-action-tab-title">Finance Automation</span>
+            </button>
+            <article id="agents-action-panel-finance" class="agents-action-panel" role="region" aria-labelledby="agents-action-tab-finance" data-agent-action-panel="finance" hidden>
+              <div class="agents-action-image-wrap">
+                <img src="assets/images/finance-automation.webp" alt="Finance professional reviewing financial reports and charts" loading="lazy" />
+              </div>
+              <div class="agents-action-card-body">
+                <p class="agents-action-card-label">Finance operations</p>
+                <h3>Finance Automation</h3>
+                <p class="agents-action-description">Streamline invoices, reconciliation, reporting, and repetitive finance operations.</p>
+                <button class="agents-action-case-study-button" type="button" disabled title="Full case study link coming soon">
+                  Read full case study <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="agents-action-tab-group">
+            <button id="agents-action-tab-procurement" class="agents-action-tab" type="button" aria-expanded="false" aria-controls="agents-action-panel-procurement" data-agent-action-tab="procurement">
+              <span class="agents-action-tab-number" aria-hidden="true">03</span>
+              <span class="agents-action-tab-title">Procurement &amp; Supply Chain</span>
+            </button>
+            <article id="agents-action-panel-procurement" class="agents-action-panel" role="region" aria-labelledby="agents-action-tab-procurement" data-agent-action-panel="procurement" hidden>
+              <div class="agents-action-image-wrap">
+                <img src="assets/images/procurement-supply-chain.webp" alt="Warehouse team coordinating procurement and supply chain operations" loading="lazy" />
+              </div>
+              <div class="agents-action-card-body">
+                <p class="agents-action-card-label">Connected operations</p>
+                <h3>Procurement &amp; Supply Chain</h3>
+                <p class="agents-action-description">Automate purchasing, monitor operations, and improve supply chain visibility.</p>
+                <button class="agents-action-case-study-button" type="button" disabled title="Full case study link coming soon">
+                  Read full case study <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FAQ SECTION ═══════════════════════ -->
+  <section id="faq-section" class="faq-section" aria-labelledby="faq-heading">
+    <div class="faq-inner">
+      <div class="faq-layout">
+        <div class="faq-sidebar">
+          <div class="faq-intro">
+            <p class="faq-eyebrow"><span aria-hidden="true"></span> FAQs</p>
+            <h2 id="faq-heading">Frequently Asked Questions</h2>
+            <p>Find quick answers about KDS ERP Crew, AI agents, integrations, and getting started.</p>
+          </div>
+
+          <aside class="faq-callout">
+            <div class="faq-callout-avatar">
+              <img src="assets/images/kds-mark-faq.webp" alt="KDS ERP Crew icon" />
+            </div>
+            <h3>Have more questions?</h3>
+            <p>Book a quick conversation with our team and discover where AI can make the biggest impact in your business.</p>
+            <button type="button" data-contact-modal-trigger>Book a Free Call <span aria-hidden="true">→</span></button>
+          </aside>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>What is KDS ERP Crew?</summary>
+            <div class="faq-answer">
+              <p>KDS ERP Crew is an AI-powered platform that helps businesses automate workflows, create AI agents, and turn ERP data into actionable insights.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can KDS ERP Crew work with my existing ERP?</summary>
+            <div class="faq-answer">
+              <p>Yes. It can work alongside your existing ERP systems without requiring you to replace your core ERP.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I create custom AI agents?</summary>
+            <div class="faq-answer">
+              <p>Yes. AI agents can be configured and customized around your specific business processes and workflows.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I use multiple AI/LLM models?</summary>
+            <div class="faq-answer">
+              <p>Yes. KDS ERP Crew provides flexibility to connect and use multiple AI/LLM models based on your business requirements.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is my business data secure?</summary>
+            <div class="faq-answer">
+              <p>KDS ERP Crew is designed with enterprise-focused security and controlled access to help protect your business data.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How can I get started?</summary>
+            <div class="faq-answer">
+              <p>Start with a Proof of Concept (POC) to explore how KDS ERP Crew can automate and improve your specific business processes.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ DEMO STEPS SECTION ════════════════════════ -->
+  <section id="demo-steps-section" class="relative" style="height:400vh">
+    <div class="sticky top-0 flex h-[100dvh] flex-col overflow-clip demo-steps-surface">
+
+      <!-- Section header -->
+      <div class="flex-shrink-0 px-6 pb-4 pt-10 text-center md:pt-12">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-widest" style="color:#2ababe">Get Started</p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl lg:text-[2.5rem]" style="color:#051895">
+          Book Your KDS ERP Crew Demo in 4 Simple Steps
+        </h2>
+        <p class="mx-auto mt-3 max-w-2xl text-base text-gray-500 md:text-[1.0625rem]">
+          Experience KDS ERP Crew in action. Book a personalized demo to see how AI-powered digital assistants automate and optimize your ERP workflows.
+        </p>
+      </div>
+
+      <!-- Progress dots -->
+      <div class="flex-shrink-0 flex items-center justify-center gap-2 pb-3">
+        <div class="demo-step-dot rounded-full transition-all duration-300" style="height:8px;width:32px;background-color:#051895"></div>
+        <div class="demo-step-dot rounded-full transition-all duration-300" style="height:8px;width:8px;background-color:rgba(5,24,149,0.18)"></div>
+        <div class="demo-step-dot rounded-full transition-all duration-300" style="height:8px;width:8px;background-color:rgba(5,24,149,0.18)"></div>
+        <div class="demo-step-dot rounded-full transition-all duration-300" style="height:8px;width:8px;background-color:rgba(5,24,149,0.18)"></div>
+      </div>
+
+      <!-- Card stack -->
+      <div class="dsc-stack-container">
+        <div class="relative w-full max-w-4xl rounded-3xl shadow-2xl" style="height:min(400px,calc(100dvh - 250px))">
+          <div class="absolute inset-0 overflow-hidden rounded-3xl">
+
+            <!-- Step 1 -->
+            <div class="demo-step-card-wrapper absolute inset-0" style="transform:translateY(0);z-index:1;will-change:transform">
+              <div class="dsc-inner">
+                <div class="dsc-img-panel">
+                  <img src="assets/images/demo-step-1-new.webp" alt="A form on screen for entering personal information — step 1 of the KDS ERP Crew demo booking" draggable="false" />
+                </div>
+                <div class="dsc-text-panel">
+                  <span class="inline-flex w-fit items-center rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest" style="background-color:rgba(251,162,38,0.12);color:#fba226">Step 1</span>
+                  <p aria-hidden="true" class="dsc-step-number select-none font-black leading-none" style="font-size:clamp(3rem,6vw,5rem);color:rgba(5,24,149,0.07)">01</p>
+                  <h3 class="dsc-heading">Share Your Requirements</h3>
+                  <p class="mt-3 max-w-md text-[0.9375rem] leading-relaxed text-gray-500">Tell us about your business, ERP environment, and the processes you want to automate.</p>
+                  <div class="mt-6 h-1 w-10 rounded-full" style="background-color:#2ababe"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="demo-step-card-wrapper absolute inset-0" style="transform:translateY(110%);z-index:2;will-change:transform">
+              <div class="dsc-inner">
+                <div class="dsc-img-panel">
+                  <img src="assets/images/demo-step-2-new.webp" alt="KDS ERP Crew operations dashboard showing AI-powered analytics and metrics" draggable="false" />
+                </div>
+                <div class="dsc-text-panel">
+                  <span class="inline-flex w-fit items-center rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest" style="background-color:rgba(251,162,38,0.12);color:#fba226">Step 2</span>
+                  <p aria-hidden="true" class="dsc-step-number select-none font-black leading-none" style="font-size:clamp(3rem,6vw,5rem);color:rgba(5,24,149,0.07)">02</p>
+                  <h3 class="dsc-heading">Schedule Your Demo</h3>
+                  <p class="mt-3 max-w-md text-[0.9375rem] leading-relaxed text-gray-500">Choose a convenient date and time for a personalized live demonstration with our ERP experts.</p>
+                  <div class="mt-6 h-1 w-10 rounded-full" style="background-color:#2ababe"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="demo-step-card-wrapper absolute inset-0" style="transform:translateY(110%);z-index:3;will-change:transform">
+              <div class="dsc-inner">
+                <div class="dsc-img-panel">
+                  <img src="assets/images/demo-step-3-new.webp" alt="KDS ERP Crew live dashboard demonstrating real-time workflow automation" draggable="false" />
+                </div>
+                <div class="dsc-text-panel">
+                  <span class="inline-flex w-fit items-center rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest" style="background-color:rgba(251,162,38,0.12);color:#fba226">Step 3</span>
+                  <p aria-hidden="true" class="dsc-step-number select-none font-black leading-none" style="font-size:clamp(3rem,6vw,5rem);color:rgba(5,24,149,0.07)">03</p>
+                  <h3 class="dsc-heading">Experience KDS ERP Crew</h3>
+                  <p class="mt-3 max-w-md text-[0.9375rem] leading-relaxed text-gray-500">See AI-powered agents automate transactions, approvals, reporting, and business workflows in real time.</p>
+                  <div class="mt-6 h-1 w-10 rounded-full" style="background-color:#2ababe"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="demo-step-card-wrapper absolute inset-0" style="transform:translateY(110%);z-index:4;will-change:transform">
+              <div class="dsc-inner">
+                <div class="dsc-img-panel">
+                  <img src="assets/images/demo-step-4-new.webp" alt="KDS ERP Crew logo on screen — ready to launch your enterprise AI journey" draggable="false" />
+                </div>
+                <div class="dsc-text-panel">
+                  <span class="inline-flex w-fit items-center rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest" style="background-color:rgba(251,162,38,0.12);color:#fba226">Step 4</span>
+                  <p aria-hidden="true" class="dsc-step-number select-none font-black leading-none" style="font-size:clamp(3rem,6vw,5rem);color:rgba(5,24,149,0.07)">04</p>
+                  <h3 class="dsc-heading">Launch Your AI Journey</h3>
+                  <p class="mt-3 max-w-md text-[0.9375rem] leading-relaxed text-gray-500">Receive a tailored implementation roadmap and discover how KDS ERP Crew can accelerate your enterprise transformation.</p>
+                  <div class="mt-6 h-1 w-10 rounded-full" style="background-color:#2ababe"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="site-footer">
+    <style>@media(min-width:768px){footer{padding-left:2.5rem!important;padding-right:2.5rem!important}}</style>
+    <div class="site-footer-content">
+      <div class="site-footer-grid">
+        <div class="site-footer-brand">
+          <img class="site-footer-logo" src="assets/images/kds-logo-footer.webp" alt="KDS ERP Crew" />
+          <h2 class="site-footer-heading">About Key Dynamics Solutions (KDS)</h2>
+          <p class="site-footer-about">
+            KDS ERP Crew is an AI-powered enterprise automation platform developed and owned by Key Dynamics Solutions. KDS empowers organizations with AI, ERP, CRM, Data Analytics, and Microsoft Power Platform solutions to simplify operations, automate business processes, and accelerate digital transformation.
+          </p>
+          <a class="site-footer-brand-link" href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Visit KDS Website →</a>
+        </div>
+
+        <div>
+          <h2 class="site-footer-heading">Agent Library</h2>
+          <ul class="site-footer-links">
+            <li><a href="agent-library.html#catalogue">O2C</a></li>
+            <li><a href="agent-library.html#catalogue">P2P</a></li>
+            <li><a href="agent-library.html#catalogue">Supply Chain</a></li>
+            <li><a href="agent-library.html#catalogue">Finance</a></li>
+            <li><a href="agent-library.html#catalogue">Platform</a></li>
+            <li><a href="agent-library.html#catalogue">Insurance</a></li>
+            <li><a href="agent-library.html#catalogue">Manufacturing</a></li>
+            <li><a href="agent-library.html#catalogue">Retail &amp; CPG</a></li>
+            <li><a href="agent-library.html#catalogue">Healthcare</a></li>
+            <li><a href="agent-library.html#catalogue">Trade Finance</a></li>
+            <li><a href="agent-library.html#catalogue">BFSI</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="site-footer-heading">Quick links</h2>
+          <ul class="site-footer-links">
+            <li><a href="about.html">About us</a></li>
+            <li><a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Blog</a></li>
+            <li><a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Case Studies</a></li>
+            <li><a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer">Privacy policy</a></li>
+            <li><a href="agent-library.html#catalogue">Agent Library</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer-contact">
+          <h2 class="site-footer-heading">Contact details</h2>
+          <ul class="site-footer-contact-list">
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>0-812 8th Floor EON Plot, No-01A, Sector 140A, Noida, Uttar Pradesh 201304</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>Khasra No. 385, 3rd Floor, Right Side, Chaudhary Balraj &amp; Sons, Ghitorni, Delhi – 110030</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>PID No.67-3,77/A, Koramangala Industrial Layout, JNC College Road, Bangalore-560095</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>Unit 79 Block 5, FF FinTech PRO, Engineering House, Western Business Parkway, Dublin, D12 NRY2, Ireland</span></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true">✉</span><a href="mailto:Sales@keydynamicssolutions.com">Sales@keydynamicssolutions.com</a></li>
+            <li class="site-footer-contact-item"><span class="site-footer-contact-icon" aria-hidden="true">☎</span><a href="tel:+919217719348">+91 9217719348</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto max-w-screen-2xl">
+      <div class="footer-inner">
+
+        <!-- Left: About -->
+        <div style="max-width:32rem">
+          <div class="flex items-center">
+            <img src="assets/images/kds-logo-footer.webp" alt="KDS ERP Crew" style="height:3.75rem;object-fit:contain;" />
+          </div>
+          <h3 class="text-hero-foreground" style="margin-top:1.5rem;font-size:1rem;font-weight:700;">About Key Dynamics Solutions (KDS)</h3>
+          <p class="text-hero-muted" style="margin-top:0.5rem;font-size:0.875rem;line-height:1.625;">
+            KDS ERP Crew is an AI-powered enterprise automation platform developed and owned by Key Dynamics Solutions. KDS empowers organizations with AI, ERP, CRM, Data Analytics, and Microsoft Power Platform solutions to simplify operations, automate business processes, and accelerate digital transformation.
+          </p>
+        </div>
+
+        <!-- Right: Want to know + Connect -->
+        <div class="footer-right">
+
+          <!-- Want to know more -->
+          <p class="text-hero-foreground" style="font-size:0.875rem;font-weight:600;">Want to know more about KDS?</p>
+          <p class="text-hero-muted" style="max-width:20rem;font-size:0.875rem;line-height:1.625;">Discover our solutions, services, and success stories by visiting the KDS website.</p>
+          <a href="https://keydynamicssolutions.com/" target="_blank" rel="noopener noreferrer"
+             class="footer-kds-link"
+             style="display:inline-flex;align-items:center;gap:0.25rem;font-size:0.875rem;font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px;">
+            Visit KDS Website →
+          </a>
+
+          <!-- Divider -->
+          <div class="footer-divider"></div>
+
+          <h3 class="text-hero-foreground" style="font-size:1rem;font-weight:700;">Connect With KDS</h3>
+          <p class="text-hero-muted" style="max-width:20rem;font-size:0.875rem;line-height:1.625;">
+            Stay connected for the latest updates, AI innovations, ERP insights, and digital transformation stories.
+          </p>
+
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <a href="https://www.linkedin.com/company/key-dynamics-solutions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/KeyDynamicsSolutions/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://x.com/keydynamics_365" target="_blank" rel="noopener noreferrer" aria-label="X" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-social-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        <p class="text-hero-muted" style="font-size:0.75rem;">© 2026 Key Dynamics Solutions Pvt. Ltd. All Rights Reserved. KDS ERP Crew™ is a product of Key Dynamics Solutions.</p>
+      </div>
+
+    </div>
+  </footer>
+  <section class="site-footer-social-bar" aria-label="Social links and copyright">
+    <div class="site-footer-social-inner">
+      <p class="site-footer-social-copy">© 2026 – All Rights Reserved Key Dynamics Solutions PVT LTD | Designed by KDS</p>
+      <nav class="site-footer-social-links" aria-label="KDS social media">
+        <a class="site-footer-social-link" href="https://www.facebook.com/KeyDynamicsSolutions/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+        <a class="site-footer-social-link site-footer-social-link--instagram" href="https://www.instagram.com/keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
+        <a class="site-footer-social-link site-footer-social-link--youtube" href="https://www.youtube.com/@keydynamicssolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube">▶</a>
+        <a class="site-footer-social-link site-footer-social-link--linkedin" href="https://www.linkedin.com/company/key-dynamics-solutions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a class="site-footer-social-link" href="https://x.com/keydynamics_365" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
+        <a class="site-footer-social-link site-footer-social-link--pinterest" href="https://in.pinterest.com/keydynamics_365/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">p</a>
+        <a class="site-footer-social-link site-footer-social-link--medium" href="https://medium.com/@keydynamicssolutionss" target="_blank" rel="noopener noreferrer" aria-label="Medium">M</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ DEMO MODAL ═══════════════════════════ -->
+  <div id="demo-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+    <div id="demo-modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm"></div>
+    <div class="fixed inset-0 flex items-center justify-center p-4">
+      <div class="relative w-full max-w-lg rounded-xl bg-white shadow-2xl p-6">
+        <button id="demo-modal-close" class="absolute right-4 top-4 rounded-sm p-1 opacity-70 hover:opacity-100 transition" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div>
+          <div class="mb-2 inline-flex w-fit items-center gap-2 rounded-full bg-brand-soft px-2.5 py-1 text-xs font-semibold text-brand">
+            <span id="demo-modal-cat"></span>
+          </div>
+          <h2 id="demo-modal-title" class="text-xl font-bold text-foreground mt-1"></h2>
+          <p id="demo-modal-desc" class="mt-2 text-sm leading-relaxed text-muted-foreground"></p>
+        </div>
+        <div class="mt-4 flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-8 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand" style="color:#2ababe"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          <p class="mt-3 text-sm font-medium">Demo video unavailable in this export</p>
+          <p class="mt-1 text-xs text-muted-foreground">On the live site this opens a full agent demo video.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ CONTACT MODAL ═══════════════════════════ -->
+  <div id="contact-modal" class="contact-modal hidden" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-hidden="true">
+    <div class="contact-modal-backdrop" data-contact-modal-close></div>
+    <div class="contact-modal-dialog" role="document">
+      <button type="button" class="contact-modal-close" data-contact-modal-close aria-label="Close contact form">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="contact-modal-heading">
+        <span class="contact-modal-eyebrow">Let's connect</span>
+        <h2 id="contact-modal-title">Schedule your AI audit</h2>
+        <p>Tell us a little about your business and our team will help you find the right next step.</p>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <div class="contact-form-field">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required />
+        </div>
+        <div class="contact-form-field">
+          <label for="contact-email">Work email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+        </div>
+        <div class="contact-form-field">
+          <label for="contact-company">Company name</label>
+          <input id="contact-company" name="company" type="text" autocomplete="organization" placeholder="Your company" required />
+        </div>
+        <div class="contact-form-field">
+          <label for="contact-country">Country</label>
+          <input id="contact-country" name="country" type="text" autocomplete="country-name" placeholder="Your country" required />
+        </div>
+        <div class="contact-form-field contact-form-field--full">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="4" placeholder="What would you like to explore?"></textarea>
+        </div>
+        <button type="submit" class="contact-form-submit">Submit request <span aria-hidden="true">→</span></button>
+      </form>
+      <div id="contact-form-success" class="contact-form-success hidden" role="status" aria-live="polite">
+        <span class="contact-form-success-icon" aria-hidden="true">✓</span>
+        <h3>Thanks — we’ve received your request.</h3>
+        <p>Our team will be in touch shortly to arrange your AI audit or free call.</p>
+        <button type="button" class="contact-form-success-close" data-contact-modal-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ AGENT CHAT WIDGET ═══════════════════════════ -->
+  <aside id="agent-chat-widget" class="agent-chat-widget is-open" aria-label="Try your matched KDS ERP Crew agent">
+    <button id="agent-chat-launcher" class="agent-chat-launcher" type="button" aria-expanded="true" aria-controls="agent-chat-panel">
+      <span class="agent-chat-launcher-dot" aria-hidden="true"></span>
+      <span class="agent-chat-launcher-label">Try your matched agent</span>
+      <svg class="agent-chat-launcher-icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+    </button>
+    <div id="agent-chat-panel" class="agent-chat-panel" role="dialog" aria-modal="false" aria-labelledby="agent-chat-title">
+      <div class="agent-chat-panel-header">
+        <div>
+          <h2 id="agent-chat-title">Meet Your AI Co-Worker</h2>
+          <p class="agent-chat-subtitle">Click a prompt or type your own.</p>
+        </div>
+        <button id="agent-chat-close" class="agent-chat-close" type="button" aria-label="Minimize agent chat">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="agent-chat-agent">
+        <span class="agent-chat-agent-status" aria-hidden="true"></span>
+        <div>
+          <strong id="agent-chat-agent-name">Supply Chain Optimization Agent</strong>
+          <span id="agent-chat-agent-meta">Supply Chain · ERP</span>
+        </div>
+      </div>
+
+      <div id="agent-chat-prompts" class="agent-chat-prompts">
+        <button type="button" class="agent-chat-prompt">What’s the current status of our supply chain?</button>
+        <button type="button" class="agent-chat-prompt">Identify potential supply chain disruptions</button>
+        <button type="button" class="agent-chat-prompt">Recommend actions to improve fulfillment</button>
+      </div>
+
+      <div id="agent-chat-messages" class="agent-chat-messages" aria-live="polite">
+        <div id="agent-chat-greeting" class="agent-chat-message agent-chat-message--bot">Hi, I’m KDS ERP Crew. I analyze procurement, inventory, supplier, and order data to identify risks, optimize supply planning, and support faster, smarter supply chain decisions.</div>
+      </div>
+
+      <form id="agent-chat-form" class="agent-chat-composer">
+        <label class="sr-only" for="agent-chat-input">Type a request for your matched agent</label>
+        <input id="agent-chat-input" type="text" autocomplete="off" placeholder="Type a request, or tap a suggestion above…" />
+        <button type="submit" aria-label="Send message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ═════════════════════════ SCRIPTS ═════════════════════════ -->
+  <script src="js/data.js"></script>
+  <script src="js/home.js?v=ai-worker-wheel-spacing-20261007"></script>
+  <script src="js/contact-modal.js?v=contact-form-20260902"></script>
+  <script src="js/agent-chat.js?v=agent-chat-20260902-2"></script>
+  <script src="js/font-scale.js?v=ai-wheel-label-font-20261007"></script>
+</body>
+</html>

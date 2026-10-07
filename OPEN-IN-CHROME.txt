@@ -1,0 +1,10 @@
+KDS ERP Crew — Chrome-ready website source
+
+OPEN LOCALLY IN CHROME
+1. Extract this entire ZIP to a folder. Do not open index.html from inside the ZIP preview.
+2. Open the extracted folder.
+3. Double-click index.html. If Windows asks which app to use, choose Google Chrome.
+
+Keep the folders named css, js, and assets beside index.html. The pages use local relative paths for their styles, scripts, fonts, and images. about.html and agent-library.html are included as additional pages.
+
+This archive contains the static website source. It does not include a running Replit API server or backend services; features that depend on those services may need the deployed app.
